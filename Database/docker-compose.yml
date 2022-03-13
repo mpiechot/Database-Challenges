@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  datenbold:
+    image: postgres
+    container_name: postgres
+    env_file:
+      - database.env
+    volumes:
+      - yobold:/var/lib/postgresql/data/
+      - ./database-files/actors.tsv:/var/lib/postgresql/data/actors.tsv
+      - ./database-files/basics.tsv:/var/lib/postgresql/data/basics.tsv
+      - ./database-files/crew.tsv:/var/lib/postgresql/data/crew.tsv
+      - ./database-files/episode.tsv:/var/lib/postgresql/data/episode.tsv
+      - ./database-files/principals.tsv:/var/lib/postgresql/data/principals.tsv
+      - ./database-files/ratings.tsv:/var/lib/postgresql/data/ratings.tsv
+      - ./database-files/titles.tsv:/var/lib/postgresql/data/titles.tsv
+    ports:
+      - "5432:5432"
+volumes:
+  yobold:
