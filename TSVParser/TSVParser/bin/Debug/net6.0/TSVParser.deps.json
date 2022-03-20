@@ -1,0 +1,66 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TSVParser/1.0.0": {
+        "dependencies": {
+          "CsvHelper": "27.2.1",
+          "FileHelpers": "3.5.1",
+          "StyleCop.Analyzers": "1.1.118"
+        },
+        "runtime": {
+          "TSVParser.dll": {}
+        }
+      },
+      "CsvHelper/27.2.1": {
+        "runtime": {
+          "lib/net6.0/CsvHelper.dll": {
+            "assemblyVersion": "27.0.0.0",
+            "fileVersion": "27.2.1.0"
+          }
+        }
+      },
+      "FileHelpers/3.5.1": {
+        "runtime": {
+          "lib/netstandard2.0/FileHelpers.dll": {
+            "assemblyVersion": "3.5.1.0",
+            "fileVersion": "3.5.1.0"
+          }
+        }
+      },
+      "StyleCop.Analyzers/1.1.118": {}
+    }
+  },
+  "libraries": {
+    "TSVParser/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CsvHelper/27.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uS5ix5hL9gL5taiAG//CScyJa8Fn1ZOh3FDhDvf4laboESFs84mCNropfp7PIt8xCkyQofljFpqu1B5UnSXjyA==",
+      "path": "csvhelper/27.2.1",
+      "hashPath": "csvhelper.27.2.1.nupkg.sha512"
+    },
+    "FileHelpers/3.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+JCzv1mlFL/jthFQgLZj4Zo2hTDzPvue+Knpp+kPYL/Wcf6ROQBiT7Horyv4s6RW69Bcokm3mDYo67fz+/e2Vw==",
+      "path": "filehelpers/3.5.1",
+      "hashPath": "filehelpers.3.5.1.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.1.118": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw==",
+      "path": "stylecop.analyzers/1.1.118",
+      "hashPath": "stylecop.analyzers.1.1.118.nupkg.sha512"
+    }
+  }
+}

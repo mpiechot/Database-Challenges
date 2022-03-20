@@ -11,6 +11,18 @@ Database: https://www.imdb.com/interfaces/
 docker exec -it postgres psql -U gast -d <database>
 ```
 
+**FileNames:**
+```
+title.principals -> principals.tsv
+title.akas -> titles.tsv
+title.basics -> basics.tsv
+title.crew -> crew.tsv
+title.episode -> episode.tsv
+title.ratings -> ratings.tsv
+name.basics -> actors.tsv
+```
+
+
 ```sql
 DROP TABLE IF EXISTS Actor;
 CREATE TABLE Actor(nconst text PRIMARY KEY, primaryName text, birthyear integer, deathyear integer, primaryprofession text[], knownfortitles text[]);
@@ -37,8 +49,8 @@ CREATE TABLE Rating(tconst text PRIMARY KEY, averagerating real, numvotes intege
 COPY rating (tconst, averagerating, numvotes) FROM '/var/lib/postgresql/data/ratings.tsv' DELIMITER E'\t' NULL as '\N' CSV HEADER;
 
 DROP TABLE IF EXISTS Title;
-CREATE TABLE Title(tconst text PRIMARY KEY, ordering integer, title text, region text, language text, types text, attributes text, isOriginalTitle integer);
-COPY title (tconst, ordering, title, region, language, types, attributes, isOriginalTitle) FROM '/var/lib/postgresql/data/episode.tsv' DELIMITER E'\t' NULL as '\N' CSV HEADER;
+CREATE TABLE Title(tconst text, ordering integer, title text, region text, language text, types text, attributes text, isOriginalTitle integer);
+COPY title (tconst, ordering, title, region, language, types, attributes, isOriginalTitle) FROM '/var/lib/postgresql/data/titles.tsv' DELIMITER E'\t' NULL as '\N' CSV HEADER;
 ```
 ## Errors:
 
@@ -47,19 +59,6 @@ DROP TABLE
 CREATE TABLE
 ERROR:  invalid input syntax for type integer: "{Animation,Comedy}"
 CONTEXT:  COPY basic, line 678502, column runtimeminutes: "{Animation,Comedy}"
-
-NOTICE:  table "principal" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-ERROR:  missing data for column "characters"
-CONTEXT:  COPY principal, line 387626: "tt0042387       7       nm0788565       writer  based on a story "Paradise Lost '49' by \N
-tt0042387       8       nm0770127       compos..."
-
-NOTICE:  table "title" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-ERROR:  invalid input syntax for type integer: "tt15180956"
-CONTEXT:  COPY title, line 2, column ordering: "tt15180956"
 
 ## Challenge 1: (22.02.2022 - 13.03.2022)
 
