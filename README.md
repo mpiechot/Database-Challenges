@@ -52,14 +52,46 @@ DROP TABLE IF EXISTS Title;
 CREATE TABLE Title(tconst text, ordering integer, title text, region text, language text, types text, attributes text, isOriginalTitle integer);
 COPY title (tconst, ordering, title, region, language, types, attributes, isOriginalTitle) FROM '/var/lib/postgresql/data/titles.tsv' DELIMITER E'\t' NULL as '\N' CSV HEADER;
 ```
-## Errors:
-
-NOTICE:  table "basic" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-ERROR:  invalid input syntax for type integer: "{Animation,Comedy}"
-CONTEXT:  COPY basic, line 678502, column runtimeminutes: "{Animation,Comedy}"
 
 ## Challenge 1: (22.02.2022 - 13.03.2022)
 
 Get the name of the actors with the most films before the year 2000 (endYear <= 2000)
+
+**Anzahl Filme pro Schauspieler mit Rang**
+```sql
+SELECT t.primaryname, t.rank
+FROM (
+  SELECT actor.primaryname, DENSE_RANK() OVER(ORDER BY COUNT(*) DESC) AS rank
+  FROM title, basic, principal, actor
+  WHERE title.tconst = basic.tconst
+  AND principal.tconst = title.tconst
+  AND principal.nconst = actor.nconst
+  AND title.types = 'original'
+  AND basic.titletype = 'movie'
+  AND basic.isadult = 0
+  AND (principal.category = 'actor' or principal.category = 'actress')
+  AND ('actor' = ANY(actor.primaryprofession) or
+       'actress' = ANY(actor.primaryprofession))
+  GROUP BY actor.nconst, actor.primaryname
+  ORDER BY rank) AS t
+WHERE t.rank = 1;
+```
+
+```sql
+SELECT t.primaryname, t.rank
+FROM (
+  SELECT actor.primaryname, DENSE_RANK() OVER(ORDER BY COUNT(*) DESC) AS rank
+  FROM title, basic, principal, actor
+  WHERE title.tconst = basic.tconst
+  AND principal.tconst = title.tconst
+  AND principal.nconst = actor.nconst
+  AND title.types = 'original'
+  AND basic.titletype = 'movie'
+  AND basic.isadult = 0
+  AND (principal.category = 'actor' or principal.category = 'actress')
+  AND ('actor' = ANY(actor.primaryprofession) or
+       'actress' = ANY(actor.primaryprofession))
+  GROUP BY actor.nconst, actor.primaryname
+  ORDER BY rank) AS t
+WHERE t.primaryName LIKE 'Nicolas Cage';
+```
