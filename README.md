@@ -95,3 +95,7 @@ FROM (
   ORDER BY rank) AS t
 WHERE t.primaryName LIKE 'Nicolas Cage';
 ```
+
+## Challenge 2: (10.04.2022 - 24.04.2022)
+
+Get a list of genres with the highest rated movie (rating/votes) per genre.
