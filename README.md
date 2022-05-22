@@ -124,3 +124,13 @@ WHERE blub.rank = 1
 ## Challenge 3: (08.05.2022 - 22.05.2022)
 
 Draw a (E)ER-Diagram for the game "Auf Achse".
+
+See the following files:
+```
+AufAchse\AufAchse-ERDiagramm-Marco.drawio
+AufAchse\AufAchse-ERDiagramm-Alex.drawio
+```
+
+## Challenge 4: (22.05.2022 - 05.06.2022)
+
+Minimize the ER-Diagram as far as possible and document every step.
