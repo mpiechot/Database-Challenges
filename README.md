@@ -99,3 +99,28 @@ WHERE t.primaryName LIKE 'Nicolas Cage';
 ## Challenge 2: (10.04.2022 - 24.04.2022)
 
 Get a list of genres with the highest rated movie (rating/votes) per genre.
+
+```sql
+SELECT b.primarytitle, b.genres, averagerating/numvotes AS rate
+FROM rating AS r, basic as b
+WHERE r.tconst = b.tconst
+ORDER BY rate DESC
+LIMIT 10;
+
+SELECT t.genre, MAX(t.rate)
+FROM (SELECT DISTINCT b.primarytitle, b.tconst, unnest(b.genres) AS genre, r.averagerating/r.numvotes AS rate
+      FROM basic as b, rating AS r
+      WHERE r.tconst = b.tconst) AS t
+GROUP BY t.genre;
+
+SELECT *
+FROM (SELECT t.genre, t.primarytitle, ROW_NUMBER() OVER(PARTITION BY t.genre ORDER BY t.rate DESC) AS rank
+      FROM (SELECT DISTINCT b.primarytitle, b.tconst, unnest(b.genres) AS genre, r.averagerating/r.numvotes AS rate
+            FROM basic as b, rating AS r
+            WHERE r.tconst = b.tconst) AS t) AS blub
+WHERE blub.rank = 1
+```
+
+## Challenge 3: (08.05.2022 - 22.05.2022)
+
+Draw a (E)ER-Diagram for the game "Auf Achse".
